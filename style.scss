@@ -1,0 +1,560 @@
+@import "../node_modules/mathsass/dist/_math.scss";
+//vars
+$fg:#000000;
+$bg:#5b5b5b;
+$pi:3.14;
+@font-face {
+  font-family: saquel;
+  src: url(/fonts/Sequel\ Sans\ Black\ Disp.otf);
+}
+
+@font-face {
+  font-family: perpetua;
+  src: url(./fonts/PERTILI.TTF);
+}
+
+
+@font-face {
+  font-family: krona;
+  src: url(./fonts/KronaOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: brownsugar;
+  src: url(./fonts/Brown\ Sugar\ .ttf);
+}
+
+@font-face {
+  font-family:saquel-ligth;
+  src: url(./fonts/Sequel\ Sans\ Light\ Disp.otf);
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background:$bg;
+    text-align:center;
+    overflow-x: hidden;
+    
+  }
+
+
+/* Estilos generales */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra */
+  background-color: #000000; /* Color de fondo de la barra */
+}
+
+/* Estilos cuando el cursor está sobre la barra */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777777; /* Color de la barra cuando está en hover */
+}
+
+/* Estilos de la barra */
+::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Color de la barra */
+  border-radius: 5px; /* Radio de borde de la barra */
+}
+
+
+
+  section {
+    width: 100%;
+    padding: 0 7%;
+    display: table;
+    margin: 0;
+    max-width: none;
+    height: 100vh;
+  
+  }
+  
+  .intro {
+    background-color: #fcfcfc;
+ 
+  }
+.title {
+  position: relative;
+ right: 4.6%;
+  z-index: 20000;
+}
+
+  .title h1{
+    display: inline-block;
+    font-family: "saquel";
+
+    font-size: 4.5rem;
+  }
+
+  .oscura {
+    color: white;
+  }
+  
+.blackbox h1{
+  color: white;
+  font-family: "perpetua";
+  font-weight:lighter;
+}
+
+.city {
+  font-size: 400px;
+  position: relative;
+  top: 20%;
+  right: 8%;
+
+
+
+}
+
+.lone {
+  position: relative;
+  top: 13%;
+  font-size: 416px;
+  transform: rotate(180deg);
+
+}
+
+  
+
+  .box1{
+    background-color:rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+
+  }
+  .box2{
+    background-image: url(./media/ferran-fusalba-rosello-BsmtphcB1_4-unsplash.jpg);
+    background-size: cover;
+    background-position:center;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  //NAV
+
+//config
+$menu-items:5;
+$open-distance:115px;
+$opening-angle:$pi - .2;
+
+a{
+  color:inherit;
+}
+h1,{
+  margin:0;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+
+%goo{
+  filter:url('#shadowed-goo');
+  // debug 
+  // background:rgba(255,0,0,0.2);
+}
+%ball{
+  background:$fg;
+  border-radius:100%;
+  width:60px;
+  height:60px;
+  margin-left:-40px;
+  position:absolute;
+  top:20px;
+  color:rgb(198, 196, 196);
+  text-align:center;
+  line-height:80px;
+  transform:translate3d(0,0,0);
+  transition:transform ease-out 200ms;
+}
+.menu-open{
+  display:none;
+ 
+}
+.menu-item{
+  @extend %ball;
+
+}
+
+.menu-item ion-icon {
+    position: relative;
+    top: -11%;
+    color: rgb(255, 255, 255);
+}
+.hamburger{
+  $width:22px;
+  $height:3px;
+  width:$width;
+  height:$height;
+  background:rgb(255, 255, 255);
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-$width/2;
+  margin-top:-$height/2;
+  transition:transform 200ms;
+  
+}
+$hamburger-spacing:8px;
+.hamburger-1{
+  transform:translate3d(0,-$hamburger-spacing,0);
+}
+.hamburger-2{
+  transform:translate3d(0,0,0);
+}
+.hamburger-3{
+  transform:translate3d(0,$hamburger-spacing,0);
+}
+.menu-open:checked+.menu-open-button{
+  .hamburger-1{
+    transform:translate3d(0,0,0) rotate(45deg); 
+  }
+  .hamburger-2{
+    transform:translate3d(0,0,0) scale(0.1,1);
+  }
+  .hamburger-3{
+    transform:translate3d(0,0,0) rotate(-45deg); 
+  }
+}
+.menu{
+  @extend %goo;
+  $width:380px;
+  $height:250px;
+  position:absolute;
+  left:50%;
+  margin-left:-$width/2;
+  padding-top:20px;
+  padding-left:$width/1.6;
+  width:$width;
+  height:$height;
+  box-sizing:border-box;
+  font-size:20px;
+  text-align:left;
+  z-index: 10000;
+}
+
+
+.menu-item{
+  &:hover{
+    background:rgb(70, 70, 70);
+  
+    color:$fg;
+  }
+  @for $i from 1 through $menu-items{
+    &:nth-child(#{$i+2}){
+      transition-duration:10ms+(60ms*($i));
+    }
+  }
+}
+
+.menu-open-button{
+  @extend %ball;
+  z-index:2;
+  transition-timing-function:cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  transition-duration:400ms;
+  transform:scale(1.1,1.1) translate3d(0,0,0);
+  cursor:pointer;
+}
+.menu-open-button:hover{
+  transform:scale(1.2,1.2) translate3d(0,0,0);
+}
+.menu-open:checked+.menu-open-button{
+  transition-timing-function:linear;
+  transition-duration:200ms;
+  transform:scale(0.8,0.8) translate3d(0,0,0);
+}
+
+.menu-open:checked~.menu-item{
+  transition-timing-function:cubic-bezier(0.935, 0.000, 0.340, 1.330);
+  @for $i from 1 through $menu-items{
+    $angle:(($pi - $opening-angle)/2)+(($opening-angle/($menu-items - 1))*($i - 1));
+    
+    &:nth-child(#{$i+2}){
+      transition-duration:80ms+(80ms*$i);
+      transform:translate3d(cos($angle)*$open-distance,sin($angle)*$open-distance,0);
+    }
+  }
+}
+//    NAV END 
+
+
+
+//blackbox
+.blackbox{
+  position:absolute;
+top: 0%;
+left: 0%;
+  background-color:black;
+  height: 100%;
+  width: 50%;
+  z-index: 0.5;
+
+}
+
+//IMG
+
+img {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 60%;
+    top:19%;
+    width: 825px;
+    height: 787px;
+  }
+
+  .socialmedia {
+     display: flex;
+      gap: 50px;
+     position: absolute;
+      left: 56%;
+      bottom: 20%;
+
+  }
+
+  .socialmedia a{
+    text-transform: uppercase;
+    font-family: "krona";
+    font-size: 30px;
+    text-decoration: none;
+  }
+
+  .socialmedia a:hover {
+    text-decoration:underline;
+  }
+
+  //marquee
+  .marquee {
+    width: 100%;
+    height: 50px;
+    bottom: 0%;
+    background-color: black;
+    text-transform: uppercase;
+    white-space: nowrap;
+    position: fixed;
+    text-align: left;
+    z-index: 10000;
+  
+  
+    div {
+      color: white;
+      font-size: 2rem;
+      font-family: "krona";
+      animation: animate 15s linear infinite;
+      display: inline-block;
+      padding-left: 100%;
+    }
+  }
+  
+  @keyframes animate {
+    100% {
+      transform: translate(-100%, 0);
+    }
+  }
+
+
+  footer {
+    padding: 1% 5%;
+    text-align:center;
+    background-color: #000000;
+    color: white;
+    height: 300px;
+  
+  }
+
+  //SEGUNDA SECCIOON 
+
+  .video {
+    position: relative;
+    top: 250px;
+    right: 6%;
+    z-index: 999;
+  }
+
+  .new {
+    position:absolute;
+    font-size: 500px;
+    font-family: "saquel";
+    top:121%;
+    left: -15%;
+    transform: rotate(-90deg);
+  }
+
+  .titlevideo {
+    position:absolute;
+    font-size: 400px;
+    font-family: "saquel";
+    top:127%;
+    right: -18%;
+    transform: rotate(90deg);
+
+  }
+ 
+ .watchnow {
+  position: absolute;
+  top: 145%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size: 30px;
+  color: #ffffff;
+  text-decoration: none;
+  z-index: 999;
+   border: 2px solid white; 
+   font-family: "brownsugar";
+   font-weight: 600;
+
+}
+.watchnow:hover {
+  background-color: #fff;
+  color: #000000;
+}
+
+.playlist {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  right: 0%;
+  display: flex;
+  align-content: space-between;
+
+
+}
+
+.songs{
+  position: relative;
+  right: 8%;
+  top: 10%;
+}
+
+.song1{
+  
+}
+.song2{
+  position: relative;
+  left:30%;
+
+  
+}
+.song3{
+  position: relative;
+  left:70%;
+
+  
+}
+.song4{
+  position: relative;
+  left:120%;
+
+  
+}
+.song5{
+  position: relative;
+  left: 170%;
+
+}
+
+.songs a {
+  color: white;
+  font-family: "saquel";
+  font-size: 72px;
+}
+
+
+.songs li{
+  padding-top: 100px;
+  
+  
+}
+
+
+li{
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.songs li a:hover {
+text-decoration:line-through;
+}
+
+.card{
+  position: relative;
+  left: 47%;
+  top: 25%;
+  width: 347px;
+  height: 681px;
+  background-color: white;
+  
+  
+}
+
+.card .titulo-card {
+  font-size: 32px;
+  font-family: "saquel" ;
+  position: relative;
+  top:12px;
+
+}
+.card img {
+  position: relative;
+  top: 1%;
+  left: -0.2%;
+  width: 347px;
+  height: 228px;
+}
+
+.card .name-band {
+  position: relative;
+  top: -1%;
+  font-family: "saquel" ;
+  font-size: 32px;
+  
+}
+
+.card .sub-card{
+  position: relative;
+  top: -2%;
+  font-family: "saquel-ligth" ;
+  font-size: 14px;
+
+}
+
+.card .title-2{
+  position: relative;
+  top: -2%;
+  font-family: "saquel-ligth" ;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.card .sub-card2{
+  position: relative;
+  top: -2%;
+    font-family: "saquel-ligth" ;
+    font-size: 13px;
+
+}
+
+
+
+.card hr {
+  position: relative;
+  top: -2%;
+  border: 1.5px solid black;
+
+}
+

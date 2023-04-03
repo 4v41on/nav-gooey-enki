@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+medi/190111_08_BuildingsTraffic_Drone_09.mp4 filter=lfs diff=lfs merge=lfs -text
+media/190111_08_BuildingsTraffic_Drone_09.mp4 filter=lfs diff=lfs merge=lfs -text
